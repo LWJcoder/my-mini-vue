@@ -1,4 +1,4 @@
-import { extend, isObject } from "../share";
+import { extend, isObject } from "../../share/index";
 import { track, trigger } from "./effect";
 import { reactive, ReactiveFlags, readonly } from "./reactive";
 const shallowReadonlyGetter = CreateGetter(true, true);

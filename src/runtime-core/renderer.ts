@@ -7,17 +7,43 @@ export function render(vnode, rootContainer) {
 
 function patch(vnode: any, rootContainer: any) {
   // 判断是element类型
+  // 'div', {class: 'red'}, children
   if (typeof vnode.type === 'string') {
-    processComponent(vnode, rootContainer)    
+    // 节点
+    processElement(vnode, rootContainer)    
+
   } else {
-    // object
+    // component
+    processComponent(vnode, rootContainer)    
     
   }
 }
-function processComponent(vnode: any, container: any) {
 
+function processElement(vnode: any, container: any) {
+  mountElement(vnode, container)
+}
+
+function mountElement(vnode: any, container: any) {
+  // 挂载
+  const el = document.createElement(vnode.type);
+
+  for (const key in vnode.props) {
+    el.setAttribute(key, vnode.props[key])    
+  }
+
+  if (vnode.children) {
+    vnode.children.forEach(v => {
+      patch(v, el);
+    })
+  }
+
+  container.append(el);
+}
+
+function processComponent(vnode: any, container: any) {
   mountComponent(vnode, container)
 }
+
 
 function mountComponent(vnode: any, container) {
   // 
@@ -32,4 +58,5 @@ function setupRenderEffect(instance: any, container) {
   const subTree = instance.render();
   patch(subTree, container);
 }
+
 

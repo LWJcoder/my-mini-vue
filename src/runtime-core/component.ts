@@ -6,6 +6,7 @@ export function createComponentInstance(vnode: any) {
     type: vnode.type,
     setupState: {},
     proxy: null,
+    props: {},
   };
 
   return component;
@@ -22,11 +23,12 @@ export function setupComponent(instance) {
 function setupStatefulComponent(instance: any) {
   // 实现this.xxx
   
-
   const Component = instance.type;
   const { setup } = Component;
+  instance.props = instance.vnode.props;
+  // debugger
   if (setup) {
-    const setupResult = setup();
+    const setupResult = setup(instance.props);
     handleSetupResult(instance, setupResult);
   }
   // debugger;

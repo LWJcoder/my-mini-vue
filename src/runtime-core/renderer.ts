@@ -54,22 +54,22 @@ function processComponent(vnode: any, container: any) {
 }
 
 
-function mountComponent(vnode: any, container) {
+function mountComponent(initialVnode: any, container) {
   // 
-  const instance = createComponentInstance(vnode);
+  const instance = createComponentInstance(initialVnode);
 
   setupComponent(instance);
-  setupRenderEffect(instance, vnode, container);
+  setupRenderEffect(instance, initialVnode, container);
 }
 
 
-function setupRenderEffect(instance: any,vnode: any, container) {
+function setupRenderEffect(instance: any, initialVnode: any, container) {
   const { proxy } = instance;
   const subTree = instance.render.call(proxy);
   patch(subTree, container);
 
   // 绑定
-  vnode.el = subTree.el;
+  initialVnode.el = subTree.el;
 }
 
 

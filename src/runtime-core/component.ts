@@ -1,3 +1,4 @@
+import { initProps } from "./componentProps";
 import { PublicInstanceHandlers } from "./componentPublicInstance";
 
 export function createComponentInstance(vnode: any) {
@@ -14,7 +15,7 @@ export function createComponentInstance(vnode: any) {
 
 export function setupComponent(instance) {
   // TODO
-  // initProps
+  initProps(instance);
   // initSlots
 
   setupStatefulComponent(instance);
@@ -25,8 +26,6 @@ function setupStatefulComponent(instance: any) {
   
   const Component = instance.type;
   const { setup } = Component;
-  instance.props = instance.vnode.props;
-  // debugger
   if (setup) {
     const setupResult = setup(instance.props);
     handleSetupResult(instance, setupResult);

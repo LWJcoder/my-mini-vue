@@ -27,11 +27,18 @@ function mountElement(vnode: any, container: any) {
   // 挂载
   const el = (vnode.el = document.createElement(vnode.type));
 
-  for (const key in vnode.props) {
-    el.setAttribute(key, vnode.props[key])    
+  const { props, children } = vnode;
+  for (const key in props) {
+
+    if (/^on[A-Z]/.test(key)) {
+      // onClick...
+      el.addEventListener(key.slice(2).toLowerCase(), props[key])
+    } else {
+      el.setAttribute(key, props[key])    
+    }
   }
 
-  const { children } = vnode;
+  // const { children } = vnode;
   if (children) {
     if (typeof children === 'string') {
       el.textContent = children;

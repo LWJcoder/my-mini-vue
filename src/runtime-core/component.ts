@@ -30,7 +30,6 @@ function setupStatefulComponent(instance: any) {
     const setupResult = setup(instance.props);
     handleSetupResult(instance, setupResult);
   }
-  // debugger;
   // const {setupState} = instance 
 
   instance.proxy = new Proxy({_: instance}, PublicInstanceHandlers)

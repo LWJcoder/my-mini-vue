@@ -30,6 +30,7 @@ function mountElement(vnode: any, container: any) {
   const { props, children } = vnode;
   for (const key in props) {
 
+    // 在初始化的时候，通过document.addEventListener 添加事件 onClick: handleClick
     if (/^on[A-Z]/.test(key)) {
       // onClick...
       el.addEventListener(key.slice(2).toLowerCase(), props[key])

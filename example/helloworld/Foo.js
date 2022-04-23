@@ -5,6 +5,7 @@ export const Foo = {
   setup(props) {
     console.log(props);
     // props.fooState++;
+    // todo
     return {
       
     }

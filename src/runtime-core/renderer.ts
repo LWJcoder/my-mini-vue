@@ -51,7 +51,7 @@ function mountElement(vnode: any, container: any) {
   container.append(el);
 }
 
-function mountChildren(children, container) {
+function mountChildren(children, container) {  
   children.forEach(v => {
     patch(v, container);
   })
@@ -65,7 +65,7 @@ function processComponent(vnode: any, container: any) {
 function mountComponent(initialVnode: any, container) {
   // 
   const instance = createComponentInstance(initialVnode);
-
+  
   setupComponent(instance);
   setupRenderEffect(instance, initialVnode, container);
 }
